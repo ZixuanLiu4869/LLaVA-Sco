@@ -37,3 +37,23 @@ torchrun --nnodes 1 --nproc_per_node 2  finetuning.py --enable_fsdp --lr 1e-5  -
 Inference
 
 python inference.py --finetuning_path PATH/TO/LORA/WEIGHTS
+
+
+
+
+TO DO LIST:
+
+This is our primary idea for combining the stage idea of LLaVA-CoT and self correction.
+
+Notice that the improvement is limited, several ideas for improvement and future work:
+
+1) The generalizability and scalability of the self-correction mechanism to diverse tasks. More benchmark results are needed.
+
+2) The characteristics of certain benchmark that make it particularly adaptable to self-correction, or why in some benchmark the performance declines.
+
+3) Comprehensive ablation studies for testing different positions for the self-correction stage in the reasoning pipeline, and how the number of reasoing affects performance (would three turns further improve results?)
+
+4) A more in-depth analysis of the error types corrected by LLaVA-SCo.
+
+5) The computational cost comparision to RL-based methods need to be quantified or empirically demonstrated.
+   
