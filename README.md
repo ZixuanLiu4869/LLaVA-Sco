@@ -3,14 +3,14 @@
 LLaVA-SCo introduces a self-correction stage into the reasoning pipeline of Vision-Language Models (VLMs), enabling models to refine their outputs through structured reflection. Our approach builds on the foundation of [LLaVA-CoT](https://github.com/PKU-YuanGroup/LLaVA-CoT) and demonstrates improvements on complex visual reasoning tasks.
 
 
-
+---
 
 ## 📁 Dataset
 You can download our dataset from:
 
 👉 [Google Drive Download](https://drive.google.com/file/d/1937sO0WJwKIAT1661wk7jCgw4-b_kAyO/view?usp=sharing)
 
-To generate your own dataset, run dataset_generation.py.
+To generate your own dataset, run `dataset_generation.py`.
 
 Before running, update the following:
 
@@ -26,26 +26,32 @@ We use Meta's [llama-recipes](https://github.com/meta-llama/llama-cookbook) for 
 
 ### Step 1: Clone This Repo
 
-<pre lang="markdown"> ```bash git clone https://github.com/ZixuanLiu4869/LLaVA-Sco.git cd LLaVA-Sco ``` </pre>
-
+```bash
+git clone https://github.com/ZixuanLiu4869/LLaVA-Sco.git
+cd LLaVA-Sco
+```
 
 ### Step 2: Download Base Dataset
 
 Download the images from [LLaVA-CoT-100k](https://github.com/PKU-YuanGroup/LLaVA-CoT).
 
-Update train/datasets/cot_dataset.py:
+Update `train/datasets/cot_dataset.py`:
 
-
+```python
 data_path = "PATH/TO/YOUR_JSONL"
-image_base_path = "PATH/TO/IMAGE_FOLDER"
 
+image_base_path = "PATH/TO/IMAGE_FOLDER"
+```
 
 ### Step 3: Install Dependencies
 
+```bash
 pip install llama-recipes
+```
 
 ### Step 4: Run Finetuning
 
+```bash
 cd train
 
 torchrun --nnodes 1 --nproc_per_node 2 finetuning.py \
@@ -64,25 +70,27 @@ torchrun --nnodes 1 --nproc_per_node 2 finetuning.py \
   --batching_strategy padding \
   --use_peft \
   --peft_method lora
+```
   
 ## 🧪 Inference
 
+```bash
 python inference.py --finetuning_path PATH/TO/LORA/WEIGHTS
-
+```
 
 ## 📌 TODO & Future Work
 
 We envision LLaVA-SCo as a step toward making VLMs more interpretable and robust. Key directions for future improvements:
 
-1. Scalability & Generalization: Explore how the self-correction mechanism scales to more tasks and domains.
+1. **Scalability & Generalization**: Explore how the self-correction mechanism scales to more tasks and domains.
 
-2. Benchmark Analysis: Identify characteristics that influence when and why self-correction helps (or hurts) performance.
+2. **Benchmark Analysis**: Identify characteristics that influence when and why self-correction helps (or hurts) performance.
 
-3. Self-Correction Placement: Conduct ablation studies on different positions and frequencies (would three turns further improve results?) of the correction stage.
+3. **Self-Correction Placement**: Conduct ablation studies on different positions and frequencies (would three turns further improve results?) of the correction stage.
 
-4. Error Analysis: Categorize error types that are best mitigated by the self-correction mechanism.
+4. **Error Analysis**: Categorize error types that are best mitigated by the self-correction mechanism.
 
-5. Efficiency Comparison: Benchmark the compute cost against RL-based methods to validate the practical trade-offs.
+5. **Efficiency Comparison**: Benchmark the compute cost against RL-based methods to validate the practical trade-offs.
 
    
 ## 📫 Citation (coming soon)
